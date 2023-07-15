@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -32,14 +33,18 @@ public class Controller {
         return acoes.listarTodos();
     }
 
-    @GetMapping("/funcionario")
-    public List<Funcionario> listar() {
-        return acoes.listar();
-    }
-
     @DeleteMapping("/funcionarios")
     public void deletarPorNome() {
         acoes.deletarPorNome();
     }
 
+    @PatchMapping("/funcionarios")
+    public void aumentarSalarios() {
+        acoes.aumentarSalarios();
+    }
+
+    @GetMapping("/funcionarios/funcao")
+    public List<FuncionarioDados> listarAgrupadosPorFuncao() {
+        return acoes.listarAgrupadosPorFuncao();
+    }
 }

@@ -6,11 +6,9 @@ import java.time.LocalDate;
 public interface FuncionarioDados {
     String getNome();
 
-    LocalDate getNascimento();
+    String getNascimento();
 
-    String getNascimentoFormatado();
-
-    BigDecimal getSalario();
+    String getSalario();
 
     String getFuncao();
 }

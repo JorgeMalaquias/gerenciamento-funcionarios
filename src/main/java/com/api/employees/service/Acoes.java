@@ -48,4 +48,12 @@ public class Acoes {
         System.out.println(funcionario.getNascimento().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
         repositorio.deleteById(funcionario.getId());
     }
+
+    public void aumentarSalarios() {
+        repositorio.increasingSalary();
+    }
+
+    public List<FuncionarioDados> listarAgrupadosPorFuncao() {
+        return repositorio.findAllGroupedByFuncao();
+    }
 }
