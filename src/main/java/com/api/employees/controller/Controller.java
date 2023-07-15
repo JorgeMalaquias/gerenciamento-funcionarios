@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.api.employees.DTOs.FuncionarioDados;
 import com.api.employees.DTOs.FuncionarioIdade;
+import com.api.employees.DTOs.FuncionarioSalarioMinimo;
 import com.api.employees.models.Funcionario;
 import com.api.employees.service.Acoes;
 
@@ -63,5 +64,16 @@ public class Controller {
     public FuncionarioIdade listarMaisVelho() {
         return acoes.listarMaisVelho();
 
+    }
+
+    @GetMapping("/funcionarios/total-salarios")
+    public String totalDeSalarios() {
+        return acoes.totalDeSalarios();
+
+    }
+
+    @GetMapping("/funcionarios/salarios-minimos")
+    public List<FuncionarioSalarioMinimo> listarTodosComSalariosMinimos() {
+        return acoes.listarTodosComSalariosMinimos();
     }
 }

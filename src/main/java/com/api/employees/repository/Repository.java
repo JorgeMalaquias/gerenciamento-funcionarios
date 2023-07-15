@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.api.employees.DTOs.FuncionarioDados;
 import com.api.employees.DTOs.FuncionarioIdade;
+import com.api.employees.DTOs.FuncionarioSalarioMinimo;
 import com.api.employees.models.Funcionario;
 
 public interface Repository extends JpaRepository<Funcionario, Long> {
@@ -35,6 +36,12 @@ public interface Repository extends JpaRepository<Funcionario, Long> {
 
     @Query(value = "SELECT nome, MAX(DATEDIFF(YEAR, nascimento, NOW())) AS idade FROM Pessoa GROUP BY nascimento", nativeQuery = true)
     List<FuncionarioIdade> findOlder();
+
+    @Query(value = "SELECT TO_CHAR(SUM(salario),'99G999D00') FROM Pessoa", nativeQuery = true)
+    String totalSalary();
+
+    @Query(value = "SELECT nome, TO_CHAR(salario/1212,'99D00') AS salariosMinimos FROM Pessoa", nativeQuery = true)
+    List<FuncionarioSalarioMinimo> findAllWithMininumSalary();
 }
 
 // DATE(nascimento.format(DateTimeFormatter.ofPattern('dd-MM-yyyy')))

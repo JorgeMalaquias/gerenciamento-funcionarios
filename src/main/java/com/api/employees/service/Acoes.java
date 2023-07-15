@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.api.employees.DTOs.FuncionarioDados;
 import com.api.employees.DTOs.FuncionarioIdade;
+import com.api.employees.DTOs.FuncionarioSalarioMinimo;
 import com.api.employees.models.Funcionario;
 import com.api.employees.repository.Repository;
 
@@ -64,5 +65,13 @@ public class Acoes {
 
     public FuncionarioIdade listarMaisVelho() {
         return repositorio.findOlder().get(0);
+    }
+
+    public String totalDeSalarios() {
+        return repositorio.totalSalary();
+    }
+
+    public List<FuncionarioSalarioMinimo> listarTodosComSalariosMinimos() {
+        return repositorio.findAllWithMininumSalary();
     }
 }
