@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.api.employees.DTOs.FuncionarioDados;
+import com.api.employees.DTOs.FuncionarioIdade;
 import com.api.employees.models.Funcionario;
 import com.api.employees.repository.Repository;
 
@@ -39,10 +40,6 @@ public class Acoes {
         return repositorio.findAllAndFilter();
     }
 
-    public List<Funcionario> listar() {
-        return repositorio.findAll();
-    }
-
     public void deletarPorNome() {
         Funcionario funcionario = repositorio.findByNome("João");
         System.out.println(funcionario.getNascimento().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
@@ -59,5 +56,13 @@ public class Acoes {
 
     public List<FuncionarioDados> listarAniversariantesDoMes() {
         return repositorio.findAllByMonthBirthDay();
+    }
+
+    public List<FuncionarioDados> listarTodosOrdenadosPorNome() {
+        return repositorio.findAllAndOrderByNome();
+    }
+
+    public FuncionarioIdade listarMaisVelho() {
+        return repositorio.findOlder().get(0);
     }
 }
