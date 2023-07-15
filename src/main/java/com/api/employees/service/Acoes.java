@@ -56,4 +56,8 @@ public class Acoes {
     public List<FuncionarioDados> listarAgrupadosPorFuncao() {
         return repositorio.findAllGroupedByFuncao();
     }
+
+    public List<FuncionarioDados> listarAniversariantesDoMes() {
+        return repositorio.findAllByMonthBirthDay();
+    }
 }

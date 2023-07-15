@@ -23,9 +23,12 @@ public interface Repository extends JpaRepository<Funcionario, Long> {
     @Query(value = "UPDATE Pessoa p SET p.salario = salario*1.1", nativeQuery = true)
     void increasingSalary();
 
-    @Transactional
     @Query(value = "SELECT nome, FORMATDATETIME(nascimento,'dd-MM-yyyy') AS nascimento, TO_CHAR(salario,'99G999D00') AS salario, funcao FROM Pessoa GROUP BY funcao, nome", nativeQuery = true)
     List<FuncionarioDados> findAllGroupedByFuncao();
+
+    @Query(value = "SELECT nome, FORMATDATETIME(nascimento,'dd-MM-yyyy') AS nascimento, TO_CHAR(salario,'99G999D00') AS salario, funcao FROM Pessoa WHERE EXTRACT(MONTH FROM nascimento) = 10 OR EXTRACT(MONTH FROM nascimento) = 12", nativeQuery = true)
+    List<FuncionarioDados> findAllByMonthBirthDay();
+
 }
 
 // DATE(nascimento.format(DateTimeFormatter.ofPattern('dd-MM-yyyy')))

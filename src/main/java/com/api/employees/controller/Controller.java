@@ -47,4 +47,9 @@ public class Controller {
     public List<FuncionarioDados> listarAgrupadosPorFuncao() {
         return acoes.listarAgrupadosPorFuncao();
     }
+
+    @GetMapping("/funcionarios/mes-aniversario")
+    public List<FuncionarioDados> listarAniversariantesDoMes() {
+        return acoes.listarAniversariantesDoMes();
+    }
 }
