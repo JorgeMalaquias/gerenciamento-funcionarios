@@ -14,11 +14,13 @@ import com.api.employees.DTOs.FuncionarioSalarioMinimo;
 import com.api.employees.models.Funcionario;
 
 public interface Repository extends JpaRepository<Funcionario, Long> {
+    Funcionario findByNome(String nome);
+
+    @Query(value = "SELECT nome, FORMATDATETIME(nascimento,'dd-MM-yyyy') AS nascimento, TO_CHAR(salario,'99G999D00') AS salario, funcao FROM Pessoa WHERE funcao=:funcao", nativeQuery = true)
+    List<FuncionarioDados> findAllByFuncao(String funcao);
 
     @Query(value = "SELECT nome, FORMATDATETIME(nascimento,'dd-MM-yyyy') AS nascimento, TO_CHAR(salario,'99G999D00') AS salario, funcao FROM Pessoa", nativeQuery = true)
     List<FuncionarioDados> findAllAndFilter();
-
-    Funcionario findByNome(String nome);
 
     @Modifying()
     @Transactional

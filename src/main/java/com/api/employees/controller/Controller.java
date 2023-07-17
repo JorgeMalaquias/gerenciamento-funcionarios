@@ -1,6 +1,7 @@
 package com.api.employees.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -75,5 +76,10 @@ public class Controller {
     @GetMapping("/funcionarios/salarios-minimos")
     public List<FuncionarioSalarioMinimo> listarTodosComSalariosMinimos() {
         return acoes.listarTodosComSalariosMinimos();
+    }
+
+    @GetMapping("/funcionarios/map")
+    public Map<String, List<FuncionarioDados>> agrupadosEmMap() {
+        return acoes.agrupadosEmMap();
     }
 }

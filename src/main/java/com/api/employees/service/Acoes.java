@@ -4,7 +4,9 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,6 +37,20 @@ public class Acoes {
         lista.add(new Funcionario("Helena", LocalDate.of(1996, 9, 2), new BigDecimal(2799.93), "Gerente"));
 
         repositorio.saveAll(lista);
+    }
+
+    public Map<String, List<FuncionarioDados>> agrupadosEmMap() {
+        Map<String, List<FuncionarioDados>> mapaNomes = new HashMap<String, List<FuncionarioDados>>();
+
+        mapaNomes.put("Operador", repositorio.findAllByFuncao("Operador"));
+        mapaNomes.put("Coordenador", repositorio.findAllByFuncao("Coordenador"));
+        mapaNomes.put("Diretor", repositorio.findAllByFuncao("Diretor"));
+        mapaNomes.put("Recepcionista", repositorio.findAllByFuncao("Recepcionista"));
+        mapaNomes.put("Contador", repositorio.findAllByFuncao("Contador"));
+        mapaNomes.put("Gerente", repositorio.findAllByFuncao("Gerente"));
+        mapaNomes.put("Eletricista", repositorio.findAllByFuncao("Eletricista"));
+
+        return mapaNomes;
     }
 
     public List<FuncionarioDados> listarTodos() {
