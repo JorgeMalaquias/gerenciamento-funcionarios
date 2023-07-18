@@ -2,6 +2,10 @@
 
 Aplicação para gerenciamento de dados de funcionários, seguindo requisitos propostos.
 
+## Rodar a aplicação
+
+Para testar os endpoints rodando em sua máquina localmente, primeiro rode o arquivo EmployeesApplication.java, e depois basta realizar as requisições para os endpoints utilizando o endereço **http://localhost:8080**. Por exemplo, para fazer a requisição GET no endpoint "/funcionarios" faça ela para o endereço "http://localhost:8080/funcionarios".
+
 ## Endpoints
 
 ## POST `/funcionarios`
