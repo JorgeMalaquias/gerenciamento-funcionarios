@@ -18,10 +18,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = false)
 public class Funcionario extends Pessoa {
-    public Funcionario(String nome, LocalDate nascimento, BigDecimal salario, String funcao) {
+    public Funcionario(String nome, int ano, int mes, int dia, double salario, String funcao) {
         this.nome = nome;
-        this.nascimento = nascimento;
-        this.salario = salario;
+        this.nascimento = LocalDate.of(ano, mes, dia);
+        this.salario = new BigDecimal(salario);
         this.funcao = funcao;
     }
 

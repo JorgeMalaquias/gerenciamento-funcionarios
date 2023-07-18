@@ -8,14 +8,15 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.api.employees.DTOs.FuncionarioDados;
 import com.api.employees.DTOs.FuncionarioIdade;
 import com.api.employees.DTOs.FuncionarioSalarioMinimo;
-import com.api.employees.models.Funcionario;
 import com.api.employees.service.Acoes;
 
 @RestController
@@ -27,23 +28,30 @@ public class Controller {
     private Acoes acoes;
 
     @PostMapping("/funcionarios")
-    public void criarFuncionarios() {
+    public void inserirFuncionarios() {
         acoes.inserirTodos();
     }
 
-    @GetMapping("/funcionarios")
-    public List<FuncionarioDados> listarTodos() {
-        return acoes.listarTodos();
+    // Para deletar João da lista, basta passar "João" como parâmetro na url ficando
+    // assim "/funcionarios/João"
+    @DeleteMapping("/funcionarios/{nome}")
+    public void deletarPorNome(@PathVariable String nome) {
+        acoes.deletarPorNome(nome);
     }
 
-    @DeleteMapping("/funcionarios")
-    public void deletarPorNome() {
-        acoes.deletarPorNome();
+    @GetMapping("/funcionarios")
+    public List<FuncionarioDados> listarTodosFuncionarios() {
+        return acoes.listarTodos();
     }
 
     @PatchMapping("/funcionarios")
     public void aumentarSalarios() {
         acoes.aumentarSalarios();
+    }
+
+    @GetMapping("/funcionarios/map")
+    public Map<String, List<FuncionarioDados>> listaragrupadosEmMapPorFuncao() {
+        return acoes.agrupadosEmMapPorFuncao();
     }
 
     @GetMapping("/funcionarios/funcao")
@@ -56,21 +64,20 @@ public class Controller {
         return acoes.listarAniversariantesDoMes();
     }
 
-    @GetMapping("/funcionarios/nome")
-    public List<FuncionarioDados> listarTodosOrdenadosPorNomes() {
-        return acoes.listarTodosOrdenadosPorNome();
-    }
-
     @GetMapping("/funcionarios/mais-velho")
     public FuncionarioIdade listarMaisVelho() {
         return acoes.listarMaisVelho();
 
     }
 
+    @GetMapping("/funcionarios/nome")
+    public List<FuncionarioDados> listarTodosOrdenadosPorNomes() {
+        return acoes.listarTodosOrdenadosPorNome();
+    }
+
     @GetMapping("/funcionarios/total-salarios")
     public String totalDeSalarios() {
-        return acoes.totalDeSalarios();
-
+        return "O total em salários de funcionários é " + acoes.totalDeSalarios();
     }
 
     @GetMapping("/funcionarios/salarios-minimos")
@@ -78,8 +85,4 @@ public class Controller {
         return acoes.listarTodosComSalariosMinimos();
     }
 
-    @GetMapping("/funcionarios/map")
-    public Map<String, List<FuncionarioDados>> agrupadosEmMap() {
-        return acoes.agrupadosEmMap();
-    }
 }
